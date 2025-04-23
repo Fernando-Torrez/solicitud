@@ -248,14 +248,12 @@
                 
                 // Configuración del correo
                 const templateParams = {
-                    to_email: 'appsinstalador1234@gmail.com',
-                    from_name: 'Invitación Especial',
-                    message: `El usuario ha respondido: ${response} a tu invitación.`,
-                    reply_to: 'no-reply@invitacion.com'
-                };
+    to_email: 'appsinstalador1234@gmail.com', // Correo destino fijo
+    message: 'Sí, acepto la invitación' // o 'No, gracias'
+};
                 
                 // Enviar correo usando EmailJS
-                emailjs.send('service_2m33mni', 'template_x8snnqg', templateParams)
+                emailjs.send('service_2m33mni', 'template_2nh2ba8', templateParams)
                     .then(function() {
                         loading.style.display = 'none';
                         if (response.includes('Sí')) {
