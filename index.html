@@ -231,51 +231,68 @@
     </div>
 
     <script>
-        // Inicializar EmailJS (usa tu propio User ID)
-        emailjs.init('B1-PAr0OwHo-wb6FS'); // Reemplaza con tu ID de EmailJS
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            const yesBtn = document.getElementById('yes-btn');
-            const noBtn = document.getElementById('no-btn');
-            const positiveResponse = document.getElementById('positive-response');
-            const negativeResponse = document.getElementById('negative-response');
-            const loading = document.getElementById('loading');
+    // Inicializar EmailJS
+    emailjs.init('B1-PAr0OwHo-wb6FS'); // Tu User ID
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        const yesBtn = document.getElementById('yes-btn');
+        const noBtn = document.getElementById('no-btn');
+        const positiveResponse = document.getElementById('positive-response');
+        const negativeResponse = document.getElementById('negative-response');
+        const loading = document.getElementById('loading');
 
-            function sendEmailResponse(response) {
-                loading.style.display = 'block';
-                positiveResponse.style.display = 'none';
-                negativeResponse.style.display = 'none';
-                
-                // Configuración del correo
-                const templateParams = {
-    to_email: 'appsinstalador1234@gmail.com', // Correo destino fijo
-    message: 'Sí, acepto la invitación' // o 'No, gracias'
-};
-                
-                // Enviar correo usando EmailJS
-                emailjs.send('service_2m33mni', 'template_2nh2ba8', templateParams)
-                    .then(function() {
-                        loading.style.display = 'none';
-                        if (response.includes('Sí')) {
-                            positiveResponse.style.display = 'block';
-                        } else {
-                            negativeResponse.style.display = 'block';
-                        }
-                    }, function(error) {
-                        loading.style.display = 'none';
-                        alert('Hubo un error al enviar tu respuesta. Por favor intenta nuevamente.');
-                        console.error('EmailJS error:', error);
-                    });
-            }
+        function sendEmailResponse(response) {
+            loading.style.display = 'block';
+            positiveResponse.style.display = 'none';
+            negativeResponse.style.display = 'none';
+            
+            // Mensaje dinámico según la respuesta
+            const responseMessage = response.includes('Sí') 
+                ? "✅ Sí aceptó la invitación con entusiasmo!" 
+                : "❌ No aceptó la invitación en esta ocasión";
+            
+            // Configuración del correo mejorada
+            const templateParams = {
+                to_email: 'appsinstalador1234@gmail.com',
+                message: responseMessage,
+                date: new Date().toLocaleDateString('es-ES', {
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                }),
+                respuesta: response // Envía la respuesta exacta
+            };
+            
+            // Envío con manejo de errores mejorado
+            emailjs.send('service_2m33mni', 'template_2nh2ba8', templateParams)
+                .then(function() {
+                    loading.style.display = 'none';
+                    if (response.includes('Sí')) {
+                        positiveResponse.style.display = 'block';
+                        // Efecto visual para respuesta positiva
+                        document.querySelector('.invitation-card').style.boxShadow = '0 0 20px rgba(195, 141, 158, 0.5)';
+                    } else {
+                        negativeResponse.style.display = 'block';
+                    }
+                })
+                .catch(function(error) {
+                    loading.style.display = 'none';
+                    alert('Error: Por favor recarga la página e intenta nuevamente.');
+                    console.error('Detalle del error:', error);
+                });
+        }
 
-            yesBtn.addEventListener('click', function() {
-                sendEmailResponse('Sí, acepto la invitación con gusto ❤️');
-            });
-
-            noBtn.addEventListener('click', function() {
-                sendEmailResponse('No, gracias por esta vez.');
-            });
+        yesBtn.addEventListener('click', function() {
+            sendEmailResponse('Sí, acepto la invitación con gusto ❤️');
         });
-    </script>
+
+        noBtn.addEventListener('click', function() {
+            sendEmailResponse('No, gracias por esta vez.');
+        });
+    });
+</script>
 </body>
 </html>
