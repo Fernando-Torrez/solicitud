@@ -12,17 +12,18 @@
 
   <style>
     :root{
-      --rose:#e1a3b0;
-      --rose-deep:#c48393;
-      --petal:#ffe9ef;
-      --petal-2:#fff6f9;
-      --ink:#3d3a3a;
-      --muted:#6b6565;
-      --card:#ffffff;
-      --ring: 0 10px 30px rgba(197, 128, 148, .20);
+      /* Paleta celeste */
+      --sky: #8bd3f7;         /* celeste suave */
+      --sky-deep: #49a9e2;    /* celeste más intenso */
+      --mist: #e9f7ff;        /* fondo muy claro */
+      --mist-2: #f4fbff;
+      --ink: #2f3a44;
+      --muted: #64707a;
+      --card: #ffffff;
+      --ring: 0 10px 30px rgba(73, 169, 226, .20);
     }
 
-    *{box-sizing:border-box}
+    * { box-sizing: border-box }
 
     body{
       margin:0;
@@ -30,32 +31,28 @@
       font-family:'Quicksand', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       color:var(--ink);
       background:
-        radial-gradient(60% 50% at 20% 10%, var(--petal) 0%, transparent 60%),
-        radial-gradient(50% 50% at 80% 0%, var(--petal-2) 0%, transparent 60%),
-        linear-gradient(180deg, #fff 0%, #fff7fb 60%, #fff 100%);
+        radial-gradient(60% 50% at 20% 10%, var(--mist) 0%, transparent 60%),
+        radial-gradient(50% 50% at 80% 0%, var(--mist-2) 0%, transparent 60%),
+        linear-gradient(180deg, #fff 0%, #f7fcff 60%, #fff 100%);
       display:grid;
       place-items:center;
       padding:24px;
       overflow-x:hidden;
     }
 
-    /* Motitas suaves */
-    .blush{
-      position:fixed;
-      inset:0;
-      pointer-events:none;
+    .aura{
+      position:fixed; inset:0; pointer-events:none; z-index:0;
       background:
-        radial-gradient(120px 120px at 10% 20%, rgba(225,163,176,.25) 0 60%, transparent 61%),
-        radial-gradient(160px 160px at 90% 15%, rgba(225,163,176,.20) 0 60%, transparent 61%),
-        radial-gradient(200px 200px at 80% 90%, rgba(225,163,176,.18) 0 60%, transparent 61%),
-        radial-gradient(180px 180px at 15% 85%, rgba(225,163,176,.15) 0 60%, transparent 61%);
-      z-index:0;
+        radial-gradient(140px 140px at 10% 20%, rgba(73,169,226,.18) 0 60%, transparent 61%),
+        radial-gradient(160px 160px at 90% 15%, rgba(73,169,226,.16) 0 60%, transparent 61%),
+        radial-gradient(220px 220px at 80% 90%, rgba(73,169,226,.14) 0 60%, transparent 61%),
+        radial-gradient(180px 180px at 15% 85%, rgba(73,169,226,.12) 0 60%, transparent 61%);
     }
 
     .card{
-      position:relative;
+      position:relative; z-index:1;
       width:min(720px, 92vw);
-      background:rgba(255,255,255,.86);
+      background:rgba(255,255,255,.9);
       backdrop-filter: blur(8px);
       border-radius:20px;
       box-shadow: var(--ring);
@@ -64,187 +61,110 @@
       transform:translateY(18px);
       opacity:0;
       animation:fadeInUp .8s ease-out forwards;
-      z-index:1;
     }
-
-    /* Borde superior con gradiente delicado */
     .card::before{
       content:"";
-      position:absolute;
-      left:0; top:0; width:100%; height:6px;
-      background:linear-gradient(90deg, var(--rose) 0%, #f3b5c3 30%, #f6cbd6 70%, var(--rose-deep) 100%);
+      position:absolute; left:0; top:0; width:100%; height:6px;
+      background:linear-gradient(90deg, var(--sky) 0%, #a7e1ff 30%, #c6edff 70%, var(--sky-deep) 100%);
     }
+    @keyframes fadeInUp{ to{ transform:translateY(0); opacity:1 } }
 
-    @keyframes fadeInUp{
-      to{ transform:translateY(0); opacity:1; }
-    }
-
-    .heading{
-      text-align:center;
-      margin:2px 0 18px;
-    }
+    .heading{ text-align:center; margin:2px 0 18px; }
     .eyebrow{
-      display:inline-block;
-      padding:.25rem .75rem;
-      border-radius:999px;
-      background:#fff3f7;
-      border:1px solid #ffe1ea;
-      color:var(--rose-deep);
-      font-weight:600;
-      font-size:.9rem;
-      letter-spacing:.02em;
+      display:inline-block; padding:.25rem .75rem; border-radius:999px;
+      background:#f0faff; border:1px solid #d6efff; color:var(--sky-deep);
+      font-weight:600; font-size:.9rem; letter-spacing:.02em;
     }
     h1{
       font-family:'Playfair Display', serif;
       font-size:clamp(1.65rem, 2.3rem, 2.6rem);
-      margin:10px 0 4px;
-      color:var(--rose-deep);
-      line-height:1.2;
+      margin:10px 0 4px; color:var(--sky-deep); line-height:1.2;
     }
-    .subtitle{
-      color:var(--muted);
-      font-size:1rem;
-      margin:0 auto 16px;
-      max-width:45ch;
-    }
+    .subtitle{ color:var(--muted); font-size:1rem; margin:0 auto 16px; max-width:45ch; }
 
     .note{
-      margin:22px auto 24px;
-      max-width:60ch;
-      background:linear-gradient(180deg,#fff 0%, #fff9fc 100%);
-      border:1px solid #ffe3ee;
-      border-radius:16px;
-      padding:18px 16px;
-      line-height:1.7;
-      color:#4a4546;
       position:relative;
+      margin:22px auto 24px; max-width:60ch;
+      background:linear-gradient(180deg,#fff 0%, #f4fbff 100%);
+      border:1px solid #dff1ff;
+      border-radius:16px; padding:18px 16px; line-height:1.7; color:#33424c;
     }
+    /* Badge superior con estrellita centrada */
     .note::before{
-      content:"✦";
+      content:"★";
       position:absolute;
-      left:14px; top:-12px;
-      font-size:1.1rem;
-      background:#fff;
-      color:var(--rose-deep);
+      top:-14px; left:50%;
+      transform:translateX(-50%);
+      font-size:1.05rem;
+      background:#ffffff;
+      color:var(--sky-deep);
       padding:6px 10px;
-      border:1px solid #ffe3ee;
+      border:1px solid #dff1ff;
       border-radius:999px;
-      box-shadow:0 4px 12px rgba(0,0,0,.04);
+      box-shadow:0 4px 12px rgba(0,0,0,.05);
+      line-height:1;
     }
-    .note em{
-      font-style:normal;
-      color:var(--rose-deep);
-      font-weight:600;
-    }
+    .note em{ font-style:normal; color:var(--sky-deep); font-weight:600; }
 
-    .question{
-      text-align:center;
-      font-size:1.15rem;
-      margin:6px 0 18px;
-      color:#544f50;
-    }
+    .question{ text-align:center; font-size:1.15rem; margin:6px 0 18px; color:#3a4a55; }
 
     .buttons{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      justify-content:center;
-      margin:10px 0 6px;
+      display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin:10px 0 6px;
     }
     .btn{
-      border:0;
-      padding:12px 22px;
-      border-radius:999px;
-      font-weight:700;
-      font-size:1rem;
-      cursor:pointer;
-      transition: transform .08s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
-      position:relative;
+      border:0; padding:12px 22px; border-radius:999px; font-weight:700; font-size:1rem;
+      cursor:pointer; transition: transform .08s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
       outline-offset:3px;
     }
     .btn:active{ transform:translateY(1px) scale(0.99); }
 
     .btn-primary{
-      background:linear-gradient(180deg, var(--rose) 0%, var(--rose-deep) 100%);
-      color:white;
-      box-shadow:0 8px 20px rgba(196,131,147,.35);
+      background:linear-gradient(180deg, var(--sky) 0%, var(--sky-deep) 100%);
+      color:white; box-shadow:0 8px 20px rgba(73,169,226,.35);
     }
-    .btn-primary:hover{
-      box-shadow:0 10px 24px rgba(196,131,147,.42);
-      filter:saturate(1.05);
-    }
+    .btn-primary:hover{ box-shadow:0 10px 24px rgba(73,169,226,.42); filter:saturate(1.05); }
 
     .btn-ghost{
-      background:#fff;
-      color:#6d6568;
-      border:1px solid #e8d6dc;
+      background:#fff; color:#5a6873; border:1px solid #d6e8f5;
     }
-    .btn-ghost:hover{
-      background:#fff6f9;
-      color:#544f52;
-    }
-
-    .legal{
-      text-align:center;
-      font-size:.86rem;
-      color:#8a8386;
-      margin:14px 0 0;
-    }
+    .btn-ghost:hover{ background:#f0f8ff; color:#42515b; }
 
     .status{
-      display:none;
-      margin:18px auto 0;
-      text-align:center;
-      font-weight:600;
-      color:#2f2a2c;
-      animation:fade .4s ease;
+      display:none; margin:18px auto 0; text-align:center; font-weight:600; color:#2f3a44; animation:fade .4s ease;
     }
-    @keyframes fade{from{opacity:0} to{opacity:1}}
+    @keyframes fade{ from{opacity:0} to{opacity:1} }
 
-    .loading{
-      display:none;
-      margin:18px auto 0;
-      text-align:center;
-      color:#6b6568;
-    }
+    .loading{ display:none; margin:18px auto 0; text-align:center; color:#5a6873; }
     .spinner{
-      width:30px; height:30px; margin:0 auto 8px;
-      border-radius:50%;
-      border:4px solid rgba(196,131,147,.22);
-      border-top-color: var(--rose-deep);
+      width:30px; height:30px; margin:0 auto 8px; border-radius:50%;
+      border:4px solid rgba(73,169,226,.22); border-top-color: var(--sky-deep);
       animation:spin 1s linear infinite;
     }
-    @keyframes spin{to{transform:rotate(360deg)}}
+    @keyframes spin{ to{ transform:rotate(360deg) } }
 
-    /* Corazoncitos */
+    /* Corazones celestes */
     .heart{
-      position:fixed;
-      width:14px; height:14px;
-      left:50%; top:50%;
+      position:fixed; width:14px; height:14px; left:50%; top:50%;
       transform:translate(-50%,-50%);
       background:
-        radial-gradient(circle at 30% 30%, #fff 0 28%, transparent 30%),
-        radial-gradient(circle at 70% 30%, #fff 0 28%, transparent 30%),
-        linear-gradient(#fff 0 0) bottom/100% 62% no-repeat;
+        radial-gradient(circle at 30% 30%, #d6efff 0 28%, transparent 30%),
+        radial-gradient(circle at 70% 30%, #d6efff 0 28%, transparent 30%),
+        linear-gradient(#d6efff 0 0) bottom/100% 62% no-repeat;
       clip-path: polygon(50% 84%, 0 40%, 25% 0, 50% 20%, 75% 0, 100% 40%);
-      pointer-events:none;
-      opacity:0;
-      z-index:999;
+      pointer-events:none; opacity:0; z-index:999;
     }
 
-    /* Separador floral */
     .divider{
       display:flex; align-items:center; gap:10px; margin:18px auto 14px; width:min(380px, 80%);
-      color:#d2a9b4;
+      color:#95cdee;
     }
     .divider::before, .divider::after{
-      content:"";
-      flex:1; height:1px; background:linear-gradient(90deg, transparent, #f1c8d3, transparent);
+      content:""; flex:1; height:1px; background:linear-gradient(90deg, transparent, #c7e8fb, transparent);
     }
   </style>
 </head>
 <body>
-  <div class="blush" aria-hidden="true"></div>
+  <div class="aura" aria-hidden="true"></div>
 
   <main class="card" role="dialog" aria-labelledby="titulo" aria-describedby="mensaje">
     <div class="heading">
@@ -256,15 +176,16 @@
     <section class="note" id="mensaje">
       He estado pensando en lo bonito que puede ser cuando dos personas se dan la oportunidad de <em>conocerse de verdad</em>.
       No busco promesas, solo un momento para coincidir y dejar que la vida nos sorprenda.
-      Tal vez sea solo una buena conversación… o quizá algo lindo esté por comenzar. ¿Te animas? 💫
+      Y si no compartimos todos los gustos, está bien: <em>no tenemos que coincidir en todo</em> para que algo lindo florezca;
+      a veces lo diferente se complementa y hace la historia más especial. ✨
     </section>
 
-    <div class="divider">✿</div>
+    <div class="divider">✺</div>
 
     <p class="question">¿Te gustaría compartir una cita conmigo?</p>
 
     <div class="buttons" role="group" aria-label="Opciones de respuesta">
-      <button class="btn btn-primary" id="yes-btn">Sí, vamos 💖</button>
+      <button class="btn btn-primary" id="yes-btn">Sí, vamos 💙</button>
       <button class="btn btn-ghost" id="no-btn">Tal vez después</button>
     </div>
 
@@ -274,13 +195,11 @@
     </div>
 
     <p class="status" id="positive-response" aria-live="polite">¡Qué ilusión! Gracias por decir que sí. ✨</p>
-    <p class="status" id="negative-response" aria-live="polite">Gracias por tu sinceridad. Si cambias de idea, aquí estaré. 🌷</p>
-
-    <p class="legal">Tu respuesta se enviará de forma privada. Solo se usará para saber tu decisión.</p>
+    <p class="status" id="negative-response" aria-live="polite">Gracias por tu sinceridad. Si cambias de idea, aquí estaré. 🌊</p>
   </main>
 
   <script>
-    // Inicializar EmailJS (mantiene tus credenciales actuales)
+    // Inicializa EmailJS (dejas tus credenciales)
     emailjs.init('B1-PAr0OwHo-wb6FS');
 
     const yesBtn = document.getElementById('yes-btn');
@@ -289,26 +208,21 @@
     const negativeResponse = document.getElementById('negative-response');
     const loading = document.getElementById('loading');
 
-    // Pequeña lluvia de corazones al aceptar
     function popHearts(count = 16){
       for(let i=0;i<count;i++){
         const h = document.createElement('div');
         h.className = 'heart';
         const size = 12 + Math.random()*10;
-        const startX = 50 + (Math.random()*40 - 20); // alrededor del centro
+        const startX = 50 + (Math.random()*40 - 20);
         const startY = 55 + (Math.random()*10 - 5);
-        const dx = (Math.random()*60 - 30); // desplazamiento horizontal
-        const dy = 80 + Math.random()*80;   // altura de subida
+        const dx = (Math.random()*60 - 30);
+        const dy = 80 + Math.random()*80;
         const delay = Math.random()*0.06;
 
         h.style.left = startX + 'vw';
         h.style.top  = startY + 'vh';
         h.style.width = h.style.height = size + 'px';
         h.style.opacity = '0.9';
-        h.style.background =
-          'radial-gradient(circle at 30% 30%, #ffdbe6 0 28%, transparent 30%),' +
-          'radial-gradient(circle at 70% 30%, #ffdbe6 0 28%, transparent 30%),' +
-          'linear-gradient(#ffdbe6 0 0) bottom/100% 62% no-repeat';
 
         document.body.appendChild(h);
 
@@ -346,8 +260,7 @@
           loading.style.display = 'none';
           if(accepted){
             positiveResponse.style.display = 'block';
-            // efecto visual
-            document.querySelector('.card').style.boxShadow = '0 0 28px rgba(196,131,147,.45)';
+            document.querySelector('.card').style.boxShadow = '0 0 28px rgba(73,169,226,.45)';
             popHearts(18);
           }else{
             negativeResponse.style.display = 'block';
@@ -360,20 +273,12 @@
         });
     }
 
-    yesBtn.addEventListener('click', function(){
-      sendEmailResponse('Sí, me encantaría conocernos 💖', true);
-    });
+    yesBtn.addEventListener('click', ()=> sendEmailResponse('Sí, me encantaría conocernos 💙', true));
+    noBtn.addEventListener('click',  ()=> sendEmailResponse('Tal vez en otro momento, gracias ✨', false));
 
-    noBtn.addEventListener('click', function(){
-      sendEmailResponse('Tal vez en otro momento, gracias ✨', false);
-    });
-
-    // Accesibilidad básica con Enter/Espacio
     [yesBtn, noBtn].forEach(b=>{
       b.addEventListener('keyup', (e)=>{
-        if(e.key === 'Enter' || e.key === ' '){
-          b.click();
-        }
+        if(e.key === 'Enter' || e.key === ' '){ b.click(); }
       });
     });
   </script>
